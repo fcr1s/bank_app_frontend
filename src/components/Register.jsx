@@ -1,5 +1,5 @@
 // Register.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import clienteService from '../services/cliente.service';
 import {useNavigate } from "react-router-dom";

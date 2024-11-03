@@ -1,22 +1,27 @@
 // Register.jsx
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
-import axios from 'axios';
+import clienteService from '../services/cliente.service';
+import {useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [rut, setRut] = useState('');
-    const [nombre, setNombre] = useState('');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/clientes/registrar', { rut, nombre, password, email });
+            const cliente = { rut, name, password, email };
+            const response = await clienteService.registrarCliente(cliente);
             console.log('Registro exitoso:', response.data);
-            // Manejar el registro (ej. redirigir a login o mostrar mensaje de éxito)
+            alert('Cliente registrado con éxito');
+            navigate('/');
         } catch (error) {
             console.error('Error en registro:', error.response ? error.response.data : error.message);
+            alert('Error al registrar cliente: ' + (error.response ? error.response.data : error.message));
         }
     };
 
@@ -37,8 +42,8 @@ const Register = () => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
                     label="Contraseña"

@@ -9,6 +9,9 @@ import Solicitud from './components/Solicitud';
 import SeguimientoSolicitud from './components/SeguimientoSolicitud'; // Asegúrate de importar SeguimientoSolicitud
 import Evaluacion from './components/Evaluacion';
 import Evaluar from './components/Evaluar';
+import Condiciones from './components/Condiciones';
+import Prestamo from './components/Prestamos';
+import HomeButton from './components/HomeButton';  
 
 const App = () => {
   return (
@@ -23,6 +26,9 @@ const App = () => {
                     <Route path="/seguimiento" element={<SeguimientoSolicitud />} />
                     <Route path="/evaluar-solicitud" element={<Evaluacion />} />
                     <Route path="/evaluar/:solicitudId" element={<Evaluar />} />
+                    <Route path="/condiciones/:id" element={<Condiciones />} />
+                    <Route path="/prestamos" element={<Prestamo />} />
+                    <Route path="/home" element={<HomeButton />} />
                     <Route path="*" element={<NotFound />} />
               </Routes>
           </div>

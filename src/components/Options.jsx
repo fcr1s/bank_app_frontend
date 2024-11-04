@@ -1,15 +1,17 @@
 // Options.jsx
-
 import { Container, Typography, Button, Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import HomeButton from './HomeButton'; 
 
 const Options = () => {
     const location = useLocation(); 
     const navigate = useNavigate();
-    const { name } = location.state || { name: 'Invitado' }; // Usa 'Invitado' si no hay nombre
+    const { name } = location.state || { name };
+    
 
     return (
         <Container style={{ marginTop: '20px' }}>
+            <HomeButton />
             {/* Título principal */}
             <Typography variant="h4" align="center" gutterBottom style={{ fontWeight: 'bold', marginBottom: '20px' }}>
                 PrestaBanco
@@ -69,7 +71,7 @@ const Options = () => {
                     Préstamos
                 </Button>
                 <Typography variant="body2" style={{ marginBottom: '20px' }}>
-                    Explora los diferentes tipos de préstamos hipotecarios que ofrecemos.
+                    Aquí podra ver el detalle de sus prestamos aprobados.
                 </Typography>
             </Box>
         </Container>

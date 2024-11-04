@@ -5,6 +5,7 @@ import { Container, Typography, Table, TableBody, TableCell, TableContainer, Tab
 import ejecutivoService from '../services/ejecutivo.service';
 import documentoService from '../services/documento.service';
 import solicitudService from '../services/solicitud.service';
+import HomeButton from './HomeButton';
 
 
 const estadosPosibles = [
@@ -12,8 +13,9 @@ const estadosPosibles = [
     "Pendiente de documentación",
     "En evaluación",
     "Pre-Aprobada",
-    "En aprobación final",
     "Aprobada",
+    "Rechazada",
+    "Cancelada por el cliente"
 ];
 
 const Evaluacion = () => {
@@ -81,6 +83,7 @@ const Evaluacion = () => {
 
     return (
         <Container maxWidth="lg" style={{ marginTop: '50px' }}>
+            <HomeButton />
             <Typography variant="h4" align="center" gutterBottom>
                 Evaluación de Solicitudes
             </Typography>

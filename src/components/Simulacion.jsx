@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import clienteService from '../services/cliente.service';
+import HomeButton from './HomeButton'; 
 
 const Simulacion = () => {
     const [tipoPrestamo, setTipoPrestamo] = useState('');
@@ -32,6 +33,7 @@ const Simulacion = () => {
 
     return (
         <Container maxWidth="md" style={{ marginTop: '50px' }}>
+            <HomeButton />
             <Typography variant="h4" align="center" gutterBottom>
                 Simulación de Crédito
             </Typography>

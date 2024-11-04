@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import clienteService from '../services/cliente.service';
 import {useNavigate } from "react-router-dom";
+import HomeButton from './HomeButton'; 
 
 const Register = () => {
     const [rut, setRut] = useState('');
@@ -27,6 +28,7 @@ const Register = () => {
 
     return (
         <Container maxWidth="sm" style={{ marginTop: '50px' }}>
+            <HomeButton />
             <Typography variant="h5">Registrar Cliente</Typography>
             <form onSubmit={handleRegister}>
                 <TextField

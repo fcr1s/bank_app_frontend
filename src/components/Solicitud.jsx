@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container, Box, Typography, TextField, Button, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Asegúrate de tener instalado react-router-dom
 import solicitudService from '../services/solicitud.service'; // Importa solicitud.service
+import HomeButton from './HomeButton'; 
 
 const Solicitud = () => {
     const [tipoPrestamo, setTipoPrestamo] = useState('');
@@ -45,6 +46,7 @@ const Solicitud = () => {
 
     return (
         <Container maxWidth="md" style={{ marginTop: '30px' }}>
+            <HomeButton />
             <Typography variant="h4" align="center" gutterBottom>Crear Solicitud de Préstamo</Typography>
 
             <Box mt={4}>

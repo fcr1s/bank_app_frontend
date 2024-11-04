@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Snackbar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Snackbar, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import solicitudService from '../services/solicitud.service';
+import HomeButton from './HomeButton'; 
 
 const SeguimientoSolicitud = () => {
     const [solicitudes, setSolicitudes] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [razonesRechazo, setRazonesRechazo] = useState([]);
+    const [setSelectedSolicitud] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSolicitudes = async () => {
@@ -37,12 +43,28 @@ const SeguimientoSolicitud = () => {
         }
     };
 
+    const handleVerRazones = (solicitud) => {
+        setRazonesRechazo(solicitud.razonesRechazo);
+        setSelectedSolicitud(solicitud);
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        setSelectedSolicitud(null);
+    };
+
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
     };
 
+    const handleVerCondiciones = (id) => {
+        navigate(`/condiciones/${id}`); // Redirige a Condiciones.jsx con el ID de la solicitud
+    };
+
     return (
         <Container maxWidth="md" style={{ marginTop: '30px' }}>
+            <HomeButton />
             <Typography variant="h4" align="center" gutterBottom>Seguimiento de Solicitudes</Typography>
             
             <TableContainer component={Paper}>
@@ -62,7 +84,27 @@ const SeguimientoSolicitud = () => {
                                 <TableCell>{solicitud.tipoPrestamo}</TableCell>
                                 <TableCell>{solicitud.estado}</TableCell>
                                 <TableCell>
-                                    {solicitud.estado !== 'Aprobada' && solicitud.estado !== 'Cancelada por el cliente' ? (
+                                    {solicitud.estado === 'Pre-Aprobada' && (
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={() => handleVerCondiciones(solicitud.id)}
+                                        >
+                                            Condiciones Finales
+                                        </Button>
+                                    )}
+                                    {/* Mostrar botón solo si la solicitud es rechazada */}
+                                    {solicitud.estado === "Rechazada" && (
+                                        <Button
+                                            variant="outlined"
+                                            color="warning"
+                                            onClick={() => handleVerRazones(solicitud)}
+                                        >
+                                            Ver Razones de Rechazo
+                                        </Button>
+                                    )}
+                                    {/* Mostrar botón de cancelar si aplica */}
+                                    {solicitud.estado !== 'Aprobada' && solicitud.estado !== 'Cancelada por el cliente' && solicitud.estado !== "Rechazada" && solicitud.estado !== "En desembolso" ? (
                                         <Button
                                             variant="outlined"
                                             color="secondary"
@@ -70,9 +112,14 @@ const SeguimientoSolicitud = () => {
                                         >
                                             Cancelar
                                         </Button>
-                                    ) : (
-                                        'Sin acciones'
-                                    )}
+                                    ) : null}
+                                    
+                                    {/* Mostrar "Sin acciones" solo si no hay botones visibles */}
+                                    {solicitud.estado !== 'Rechazada' && !(
+                                        solicitud.estado === 'Pre-Aprobada' ||
+                                        solicitud.estado !== 'Aprobada' && 
+                                        solicitud.estado !== 'Cancelada por el cliente'
+                                    ) ? 'Sin acciones' : null}
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -86,6 +133,26 @@ const SeguimientoSolicitud = () => {
                 onClose={handleCloseSnackbar}
                 message={errorMessage}
             />
+
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>Razones de Rechazo</DialogTitle>
+                <DialogContent>
+                    {razonesRechazo.length > 0 ? (
+                        razonesRechazo.map((razon, index) => (
+                            <Typography key={index} variant="body1">
+                                - {razon}
+                            </Typography>
+                        ))
+                    ) : (
+                        <Typography variant="body1">No hay razones de rechazo disponibles.</Typography>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 };

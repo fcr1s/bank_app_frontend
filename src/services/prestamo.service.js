@@ -20,8 +20,8 @@ const obtenerPrestamoPorSolicitudId = (solicitudId) => {
     return httpClient.get(`/prestamos/solicitud/${solicitudId}`);
 }
 
-const responderPrestamo = (id, aceptar) => {
-    return httpClient.post(`/prestamos/${id}/respuesta`, null, {
+const responderPrestamo = (solicitudId, aceptar) => {
+    return httpClient.post(`/prestamos/${solicitudId}/respuesta`, null, {
         params: { aceptar }
     });
 }

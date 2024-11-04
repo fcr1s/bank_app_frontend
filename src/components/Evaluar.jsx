@@ -3,6 +3,7 @@ import { Container, Typography, TextField, Button, Box } from '@mui/material';
 import ejecutivoService from '../services/ejecutivo.service';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import HomeButton from './HomeButton'; 
 
 const Evaluar = () => {
     const navigate = useNavigate();
@@ -57,6 +58,7 @@ const Evaluar = () => {
 
     return (
         <Container maxWidth="sm" style={{ marginTop: '50px' }}>
+            <HomeButton />
             <Typography variant="h4" align="center" gutterBottom>
                 Evaluar Solicitud
             </Typography>
@@ -127,7 +129,7 @@ const Evaluar = () => {
                     </label>
                 </Box>
                 <TextField
-                    label="Total Depósitos"
+                    label="Total en Depósitos"
                     name="totalDepositos"
                     value={formData.totalDepositos}
                     onChange={handleChange}

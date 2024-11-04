@@ -51,7 +51,7 @@ const Options = () => {
                 <Button 
                     variant="contained" 
                     color="primary" 
-                    onClick={() => navigate('/seguimiento-solicitud')}
+                    onClick={() => navigate('/seguimiento')}
                     style={{ margin: '10px' }}
                 >
                     Seguimiento de Solicitud

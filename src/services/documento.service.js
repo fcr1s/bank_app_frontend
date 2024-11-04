@@ -1,24 +1,27 @@
 import httpClient from "../http-common";
 
-const guardarDocumento = (documento) => {
-    return httpClient.post("/documentos/guardar", documento)
-}
+const guardarDocumento = (solicitudId, archivo) => {
+    const formData = new FormData();
+    formData.append('solicitudId', solicitudId);
+    formData.append('documento', archivo);
 
-const obtenerDocumentosPorRutCliente = (rutCliente) => {
-    return httpClient.get("/documentos/obtener", {
-        params: { rutCliente }
-    })
+    return httpClient.post("/documentos/guardar", formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
 }
 
 const obtenerDocumentosPorSolicitudId = (solicitudId) => {
-    return httpClient.get(`/documentos/obtener/${solicitudId}`)
+    return httpClient.get(`/documentos/obtener/${solicitudId}`);
 }
 
-const actualizarDocumentos = (solicitudId, nuevosDocumentos) => {
-    return httpClient.put("/documentos/actualizar", nuevosDocumentos, {
-        params: { solicitudId }
-    })
+const descargarDocumento = (id) => {
+    return httpClient.get(`/documentos/descargar/${id}`, { responseType: 'blob' });
 }
 
-export default { guardarDocumento, obtenerDocumentosPorRutCliente, obtenerDocumentosPorSolicitudId, actualizarDocumentos };
-
+export default { 
+    guardarDocumento, 
+    obtenerDocumentosPorSolicitudId, 
+    descargarDocumento 
+};

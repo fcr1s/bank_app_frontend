@@ -1,31 +1,52 @@
 import httpClient from "../http-common";
 
 const obtenerSolicitudes = () => {
-    return httpClient.get("/solicitudes/")
+    return httpClient.get("/solicitudes/");
 }
 
 const obtenerSolicitudPorId = (id) => {
-    return httpClient.get(`/solicitudes/${id}`)
+    return httpClient.get(`/solicitudes/${id}`);
 }
 
 const eliminarSolicitud = (id) => {
-    return httpClient.delete(`/solicitudes/${id}`)
+    return httpClient.delete(`/solicitudes/${id}`);
 }
 
 const crearSolicitud = (tipoPrestamo, valorPropiedad, montoPrestamo, tasaInteresAnual, plazo, documentos) => {
-    return httpClient.post("/solicitudes/crear", documentos, {
-        params: { tipoPrestamo, valorPropiedad, montoPrestamo, tasaInteresAnual, plazo }
-    })
+    const formData = new FormData();
+    formData.append('tipoPrestamo', tipoPrestamo);
+    formData.append('valorPropiedad', valorPropiedad);
+    formData.append('montoPrestamo', montoPrestamo);
+    formData.append('tasaInteresAnual', tasaInteresAnual);
+    formData.append('plazo', plazo);
+    
+    // Agregar documentos al FormData
+    documentos.forEach((documento) => {
+        formData.append('documentos', documento);
+    });
+
+    return httpClient.post("/solicitudes/crear", formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
 }
 
 const obtenerSolicitudesDelCliente = () => {
-    return httpClient.get("/solicitudes/mis-solicitudes")
+    return httpClient.get("/solicitudes/mis-solicitudes");
 }
 
 const cancelarSolicitud = (solicitudId, rutCliente) => {
     return httpClient.put("/solicitudes/cancelar", null, {
         params: { solicitudId, rutCliente }
-    })
+    });
 }
 
-export default { obtenerSolicitudes, obtenerSolicitudPorId, eliminarSolicitud, crearSolicitud, obtenerSolicitudesDelCliente, cancelarSolicitud };   
+export default { 
+    obtenerSolicitudes, 
+    obtenerSolicitudPorId, 
+    eliminarSolicitud, 
+    crearSolicitud, 
+    obtenerSolicitudesDelCliente, 
+    cancelarSolicitud 
+};

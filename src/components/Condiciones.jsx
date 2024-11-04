@@ -55,7 +55,7 @@ const Condiciones = () => {
     };
 
     if (!prestamo) {
-        return <Typography variant="h6">Cargando detalles del préstamo...</Typography>; // Muestra un mensaje de carga
+        return <Typography variant="h6">Cargando detalles del préstamo...</Typography>;
     }
 
     return (

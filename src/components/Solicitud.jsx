@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Box, Typography, TextField, Button, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom'; // Asegúrate de tener instalado react-router-dom
-import solicitudService from '../services/solicitud.service'; // Importa solicitud.service
+import { useNavigate } from 'react-router-dom';
+import solicitudService from '../services/solicitud.service'; 
 import HomeButton from './HomeButton'; 
 
 const Solicitud = () => {

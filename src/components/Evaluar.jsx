@@ -7,7 +7,7 @@ import HomeButton from './HomeButton';
 
 const Evaluar = () => {
     const navigate = useNavigate();
-    const { solicitudId } = useParams(); // Asumiendo que el ID de la solicitud se pasa como parámetro en la ruta
+    const { solicitudId } = useParams(); 
     const [formData, setFormData] = useState({
         ingresosMensuales: '',
         buenHistorialCrediticio: false,
@@ -16,7 +16,7 @@ const Evaluar = () => {
         valorPropiedad: '',
         edadCliente: '',
         saldoCuenta: '',
-        saldoConsistente: false, // Asegúrate que sea booleano
+        saldoConsistente: false, 
         totalDepositos: '',
         antiguedadCuenta: '',
         porcentajeRetiroReciente: ''
@@ -35,20 +35,19 @@ const Evaluar = () => {
         try {
             // Convertir valores a los tipos correctos
             await ejecutivoService.evaluarSolicitud(solicitudId, 
-                parseFloat(formData.ingresosMensuales), // double
-                formData.buenHistorialCrediticio, // boolean
-                parseInt(formData.antiguedadLaboral), // int
-                parseFloat(formData.totalDeudas), // double
-                parseFloat(formData.valorPropiedad), // double
-                parseInt(formData.edadCliente), // int
-                parseFloat(formData.saldoCuenta), // double
-                formData.saldoConsistente, // boolean
-                parseFloat(formData.totalDepositos), // double
-                parseInt(formData.antiguedadCuenta), // int
-                parseFloat(formData.porcentajeRetiroReciente) // double
+                parseFloat(formData.ingresosMensuales), 
+                formData.buenHistorialCrediticio, 
+                parseInt(formData.antiguedadLaboral), 
+                parseFloat(formData.totalDeudas), 
+                parseFloat(formData.valorPropiedad), 
+                parseInt(formData.edadCliente), 
+                parseFloat(formData.saldoCuenta), 
+                formData.saldoConsistente, 
+                parseFloat(formData.totalDepositos), 
+                parseInt(formData.antiguedadCuenta), 
+                parseFloat(formData.porcentajeRetiroReciente) 
             );
             alert('Evaluación enviada con éxito');
-            // Aquí podrías redirigir al usuario o hacer cualquier otra acción que necesites
             navigate('/evaluar-solicitud');
         } catch (error) {
             console.error('Error al enviar la evaluación:', error);

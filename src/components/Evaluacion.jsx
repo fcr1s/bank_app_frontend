@@ -51,7 +51,7 @@ const Evaluacion = () => {
         try {
             await ejecutivoService.actualizarEstadoSolicitud(id, nuevoEstado);
             setEstadoActual(prev => ({ ...prev, [id]: nuevoEstado }));
-            obtenerSolicitudes(); // Reobtenemos las solicitudes para refrescar la tabla
+            obtenerSolicitudes(); //refrescar
         } catch (error) {
             console.error('Error al actualizar el estado de la solicitud:', error);
         }

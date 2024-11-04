@@ -1,11 +1,11 @@
 // Home.jsx
 import { useState } from 'react';
 import { Container, Box, TextField, Button, Paper, Typography, Snackbar, List, ListItem, ListItemText } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
-import Options from './Options'; 
-import OptionsEjecutivo from './OptionsEjecutivo';
+import Options from './Options';
+import Evaluacion from './Evaluacion';
 import clienteService from '../services/cliente.service';
+import ejecutivoService from '../services/ejecutivo.service';
 
 const Home = () => {
     const [rutCliente, setRutCliente] = useState('');
@@ -14,42 +14,45 @@ const Home = () => {
     const [passwordEjecutivo, setPasswordEjecutivo] = useState('');
     const [name, setName] = useState(''); 
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
-    const [errorMessage, setErrorMessage] = useState(''); // Estado para el mensaje de error
-    const [openSnackbar, setOpenSnackbar] = useState(false); // Estado para controlar Snackbar
+    const [isEjecutivo, setIsEjecutivo] = useState(false); // Nuevo estado para identificar ejecutivo
+    const [errorMessage, setErrorMessage] = useState(''); 
+    const [openSnackbar, setOpenSnackbar] = useState(false); 
 
     const navigate = useNavigate(); 
 
     const handleLoginCliente = async (e) => {
         e.preventDefault();
         try {
-            const response = await clienteService.login(rutCliente, passwordCliente); // Utiliza el servicio
+            const response = await clienteService.login(rutCliente, passwordCliente);
             console.log('Login cliente:', response.data);
-            setName(response.data.name); // Obtiene el nombre del cliente desde el
-            setIsLoggedIn(true); // Cambia el estado a logueado
-            navigate('/options', { state: { name: response.data.name } }); // Redirige a la ruta de opciones
+            setName(response.data.name); 
+            setIsLoggedIn(true); 
+            setIsEjecutivo(false); // Indica que no es un ejecutivo
+            navigate('/options', { state: { name: response.data.name } });
         } catch (error) {
             console.error('Error en login cliente:', error.response ? error.response.data : error.message);
-            setErrorMessage('RUT o contraseña incorrectos'); // Mensaje de error
-            setOpenSnackbar(true); // Abre el Snackbar que 
+            setErrorMessage('RUT o contraseña incorrectos');
+            setOpenSnackbar(true); 
         }
-    };
-
-    const handleCloseSnackbar = () => {
-        setOpenSnackbar(false); 
     };
 
     const handleLoginEjecutivo = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/ejecutivos/login', null, { params: { rut: rutEjecutivo, password: passwordEjecutivo } });
+            const response = await ejecutivoService.loginEjecutivo(rutEjecutivo, passwordEjecutivo);
             console.log('Login ejecutivo:', response.data);
-            setIsLoggedIn(true); // Cambia el estado a logueado
-            navigate('/options-ejecutivo'); // Redirige a la ruta de opciones
+            setIsLoggedIn(true); 
+            setIsEjecutivo(true); // Indica que es un ejecutivo
+            navigate('/evaluar-solicitud');
         } catch (error) {
             console.error('Error en login ejecutivo:', error.response ? error.response.data : error.message);
-            setErrorMessage('RUT o contraseña incorrectos'); // Mensaje de error
-            setOpenSnackbar(true); // Abre el Snackbar
+            setErrorMessage('RUT o contraseña incorrectos');
+            setOpenSnackbar(true);
         }
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false); 
     };
 
     return (
@@ -58,7 +61,7 @@ const Home = () => {
                 Bienvenido a PrestaBanco
             </Typography>
             {isLoggedIn ? (
-                <Options name={name} /> 
+                isEjecutivo ? <Evaluacion /> : <Options name={name} /> 
             ) : (
                 <Box display="flex" justifyContent="space-between" alignItems="flex-start">
                     <Box flex={1} marginRight={2}>
@@ -128,7 +131,6 @@ const Home = () => {
                 </Button>
             )}
 
-            {/* Información sobre préstamos */}
             <Typography variant="h6" align="center" gutterBottom style={{ marginTop: '40px' }}>
                 PrestaBanco ofrece una variedad de préstamos hipotecarios, adaptados a las diferentes necesidades de sus clientes. 
             </Typography>
@@ -150,7 +152,6 @@ const Home = () => {
                 </ListItem>
             </List>
 
-            {/* Snackbar para mostrar mensajes de error */}
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}

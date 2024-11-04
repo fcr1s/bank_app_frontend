@@ -12,7 +12,7 @@ const HomeButton = () => {
     return (
         <IconButton 
             onClick={handleHomeClick} 
-            style={{ position: 'absolute', top: 16, left: 16 }} // Estilo para posicionar el botón
+            style={{ position: 'absolute', top: 16, left: 16 }} // posicionar el botón
             color="primary"
         >
             <HomeIcon />

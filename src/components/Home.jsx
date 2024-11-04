@@ -14,7 +14,7 @@ const Home = () => {
     const [passwordEjecutivo, setPasswordEjecutivo] = useState('');
     const [name, setName] = useState(''); 
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
-    const [isEjecutivo, setIsEjecutivo] = useState(false); // Nuevo estado para identificar ejecutivo
+    const [isEjecutivo, setIsEjecutivo] = useState(false); 
     const [errorMessage, setErrorMessage] = useState(''); 
     const [openSnackbar, setOpenSnackbar] = useState(false); 
 

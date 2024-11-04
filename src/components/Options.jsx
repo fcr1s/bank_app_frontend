@@ -1,12 +1,11 @@
 // Options.jsx
 import { Container, Typography, Button, Box } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import HomeButton from './HomeButton'; 
 
 const Options = () => {
-    const location = useLocation(); 
+
     const navigate = useNavigate();
-    const { name } = location.state || { name };
     
 
     return (
@@ -18,7 +17,7 @@ const Options = () => {
             </Typography>
             {/* Bienvenida personalizada */}
             <Typography variant="h5" align="center" gutterBottom>
-                Bienvenido, {name}!
+                Bienvenido a PrestaBanco!
             </Typography>
             <Typography align="center" variant="h6" gutterBottom>
                 ¿Qué deseas hacer?

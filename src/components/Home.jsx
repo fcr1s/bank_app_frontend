@@ -4,6 +4,7 @@ import { Container, Box, TextField, Button, Paper, Typography, Snackbar, List, L
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 import Options from './Options'; 
+import OptionsEjecutivo from './OptionsEjecutivo';
 import clienteService from '../services/cliente.service';
 
 const Home = () => {
@@ -43,7 +44,7 @@ const Home = () => {
             const response = await axios.post('/ejecutivos/login', null, { params: { rut: rutEjecutivo, password: passwordEjecutivo } });
             console.log('Login ejecutivo:', response.data);
             setIsLoggedIn(true); // Cambia el estado a logueado
-            navigate('/options'); // Redirige a la ruta de opciones
+            navigate('/options-ejecutivo'); // Redirige a la ruta de opciones
         } catch (error) {
             console.error('Error en login ejecutivo:', error.response ? error.response.data : error.message);
             setErrorMessage('RUT o contraseña incorrectos'); // Mensaje de error

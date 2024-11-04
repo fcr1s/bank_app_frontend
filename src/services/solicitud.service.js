@@ -36,9 +36,9 @@ const obtenerSolicitudesDelCliente = () => {
     return httpClient.get("/solicitudes/mis-solicitudes");
 }
 
-const cancelarSolicitud = (solicitudId, rutCliente) => {
+const cancelarSolicitud = (solicitudId) => {
     return httpClient.put("/solicitudes/cancelar", null, {
-        params: { solicitudId, rutCliente }
+        params: { solicitudId}
     });
 }
 

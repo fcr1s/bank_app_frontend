@@ -7,7 +7,7 @@ import Options from "./components/Options"; // Asegúrate de importar Options
 import Simulacion from "./components/Simulacion"; // Asegúrate de importar Simulacion
 import Solicitud from './components/Solicitud';
 import SeguimientoSolicitud from './components/SeguimientoSolicitud'; // Asegúrate de importar SeguimientoSolicitud
-
+import OptionsEjecutivo from './components/OptionsEjecutivo'; // Asegúrate de importar OptionsEjecutivo
 const App = () => {
   return (
       <Router>
@@ -19,6 +19,7 @@ const App = () => {
                     <Route path="/simulacion" element={<Simulacion />} />
                     <Route path="/solicitud" element={<Solicitud />} />
                     <Route path="/seguimiento" element={<SeguimientoSolicitud />} />
+                    <Route path="/options-ejecutivo" element={<OptionsEjecutivo />} />
                     <Route path="*" element={<NotFound />} />
               </Routes>
           </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Snackbar } from '@mui/material';
-import solicitudService from '../services/solicitud.service'; // Asegúrate de importar el servicio
+import solicitudService from '../services/solicitud.service';
 
 const SeguimientoSolicitud = () => {
     const [solicitudes, setSolicitudes] = useState([]);
@@ -11,7 +11,7 @@ const SeguimientoSolicitud = () => {
         const fetchSolicitudes = async () => {
             try {
                 const response = await solicitudService.obtenerSolicitudesDelCliente();
-                setSolicitudes(response.data); // Asumiendo que el backend retorna un array de solicitudes
+                setSolicitudes(response.data);
             } catch (error) {
                 console.error('Error al obtener solicitudes:', error.response ? error.response.data : error.message);
                 setErrorMessage('Error al cargar las solicitudes. Intenta de nuevo más tarde.');
@@ -22,21 +22,23 @@ const SeguimientoSolicitud = () => {
         fetchSolicitudes();
     }, []);
 
-    const handleCloseSnackbar = () => {
-        setOpenSnackbar(false);
-    };
-
     const handleCancelarSolicitud = async (id) => {
         try {
-            await solicitudService.cancelarSolicitud(id); // Llama al servicio para cancelar la solicitud
-            alert('Solicitud cancelada exitosamente');
-            // Refresca la lista de solicitudes después de cancelar
-            const updatedSolicitudes = solicitudes.filter((solicitud) => solicitud.id !== id);
-            setSolicitudes(updatedSolicitudes);
+            await solicitudService.cancelarSolicitud(id);
+            setSolicitudes((prevSolicitudes) =>
+                prevSolicitudes.map((solicitud) =>
+                    solicitud.id === id ? { ...solicitud, estado: 'Cancelada por el cliente' } : solicitud
+                )
+            );
         } catch (error) {
-            console.error('Error al cancelar la solicitud:', error);
-            alert('Error al cancelar la solicitud');
+            console.error('Error al cancelar solicitud:', error);
+            setErrorMessage('Error al cancelar la solicitud. Intenta de nuevo más tarde.');
+            setOpenSnackbar(true);
         }
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
 
     return (
@@ -60,14 +62,16 @@ const SeguimientoSolicitud = () => {
                                 <TableCell>{solicitud.tipoPrestamo}</TableCell>
                                 <TableCell>{solicitud.estado}</TableCell>
                                 <TableCell>
-                                    {solicitud.estado !== 'Aprobada' && (
-                                        <Button 
-                                            variant="outlined" 
-                                            color="secondary" 
+                                    {solicitud.estado !== 'Aprobada' && solicitud.estado !== 'Cancelada por el cliente' ? (
+                                        <Button
+                                            variant="outlined"
+                                            color="secondary"
                                             onClick={() => handleCancelarSolicitud(solicitud.id)}
                                         >
                                             Cancelar
                                         </Button>
+                                    ) : (
+                                        'Sin acciones'
                                     )}
                                 </TableCell>
                             </TableRow>

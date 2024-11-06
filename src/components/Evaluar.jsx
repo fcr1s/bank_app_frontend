@@ -13,7 +13,6 @@ const Evaluar = () => {
         buenHistorialCrediticio: false,
         antiguedadLaboral: '',
         totalDeudas: '',
-        valorPropiedad: '',
         edadCliente: '',
         saldoCuenta: '',
         saldoConsistente: false, 
@@ -39,7 +38,6 @@ const Evaluar = () => {
                 formData.buenHistorialCrediticio, 
                 parseInt(formData.antiguedadLaboral), 
                 parseFloat(formData.totalDeudas), 
-                parseFloat(formData.valorPropiedad), 
                 parseInt(formData.edadCliente), 
                 parseFloat(formData.saldoCuenta), 
                 formData.saldoConsistente, 
@@ -84,15 +82,6 @@ const Evaluar = () => {
                     label="Total Deudas"
                     name="totalDeudas"
                     value={formData.totalDeudas}
-                    onChange={handleChange}
-                    fullWidth
-                    margin="normal"
-                    type="number"
-                />
-                <TextField
-                    label="Valor Propiedad"
-                    name="valorPropiedad"
-                    value={formData.valorPropiedad}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"

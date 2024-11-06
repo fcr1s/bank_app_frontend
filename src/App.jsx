@@ -2,15 +2,15 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./components/Home";
 import Register from "./components/Register"; 
-import NotFound from "./components/NotFound"; // Asegúrate de importar NotFound
-import Options from "./components/Options"; // Asegúrate de importar Options
-import Simulacion from "./components/Simulacion"; // Asegúrate de importar Simulacion
+import NotFound from "./components/NotFound"; 
+import Options from "./components/Options"; 
+import Simulacion from "./components/Simulacion"; 
 import Solicitud from './components/Solicitud';
-import SeguimientoSolicitud from './components/SeguimientoSolicitud'; // Asegúrate de importar SeguimientoSolicitud
+import SeguimientoSolicitud from './components/SeguimientoSolicitud'; 
 import Evaluacion from './components/Evaluacion';
 import Evaluar from './components/Evaluar';
 import Condiciones from './components/Condiciones';
-import Prestamo from './components/Prestamos';
+import Prestamos from './components/Prestamos';
 import HomeButton from './components/HomeButton';  
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
                     <Route path="/evaluar-solicitud" element={<Evaluacion />} />
                     <Route path="/evaluar/:solicitudId" element={<Evaluar />} />
                     <Route path="/condiciones/:id" element={<Condiciones />} />
-                    <Route path="/prestamos" element={<Prestamo />} />
+                    <Route path="/prestamos" element={<Prestamos />} />
                     <Route path="/home" element={<HomeButton />} />
                     <Route path="*" element={<NotFound />} />
               </Routes>

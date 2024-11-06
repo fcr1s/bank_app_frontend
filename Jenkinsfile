@@ -3,7 +3,7 @@ pipeline {
     tools {
         nodejs 'node_20_18_0' // Usa el nombre que configuraste en Jenkins
     }
-
+    
     stages {
         stage('Checkout Frontend') {
             steps {

@@ -1,7 +1,7 @@
 // Options.jsx
 import { Container, Typography, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import HomeButton from './HomeButton'; 
+import HomeButton from './HomeButton';
 
 const Options = () => {
 

@@ -10,8 +10,7 @@ import SeguimientoSolicitud from './components/SeguimientoSolicitud';
 import Evaluacion from './components/Evaluacion';
 import Evaluar from './components/Evaluar';
 import Condiciones from './components/Condiciones';
-import Prestamos from './components/Prestamos';
-import HomeButton from './components/HomeButton';  
+import Prestamos from './components/Prestamos'; 
 
 const App = () => {
   return (
@@ -28,7 +27,6 @@ const App = () => {
                     <Route path="/evaluar/:solicitudId" element={<Evaluar />} />
                     <Route path="/condiciones/:id" element={<Condiciones />} />
                     <Route path="/prestamos" element={<Prestamos />} />
-                    <Route path="/home" element={<HomeButton />} />
                     <Route path="*" element={<NotFound />} />
               </Routes>
           </div>

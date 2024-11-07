@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'node_20_18_0' // Usa el nombre que configuraste en Jenkins
+        nodejs 'node_20_18_0' 
     }
     
     stages {

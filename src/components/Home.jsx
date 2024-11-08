@@ -1,5 +1,5 @@
 // Home.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Box, TextField, Button, Paper, Typography, Snackbar, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; 
 import Options from './Options';
@@ -19,6 +19,13 @@ const Home = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false); 
 
     const navigate = useNavigate(); 
+
+    useEffect(() => {
+        const realizarLogout = async () => {
+                await clienteService.logout();
+        };
+        realizarLogout();
+    }, []);
 
     const handleLoginCliente = async (e) => {
         e.preventDefault();

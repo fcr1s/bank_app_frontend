@@ -129,7 +129,7 @@ const Simulacion = () => {
 
             {cuotaMensual !== null && (
                 <Typography variant="h6" style={{ marginTop: '20px' }}>
-                    Cuota Mensual: ${cuotaMensual}
+                    Cuota Mensual: ${cuotaMensual.toFixed(2)}
                 </Typography>
             )}
 

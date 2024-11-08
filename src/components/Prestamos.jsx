@@ -67,15 +67,15 @@ const Prestamo = () => {
                                 <TableCell>{prestamo.tipoPrestamo}</TableCell>
                                 <TableCell>{prestamo.plazo}</TableCell>
                                 <TableCell>{prestamo.numeroDeCuotas}</TableCell>
-                                <TableCell>{prestamo.montoDelPrestamo}</TableCell>
-                                <TableCell>{prestamo.tasaDeInteresAnual.toFixed(1)}%</TableCell>
-                                <TableCell>{prestamo.tasaDeInteresMensual.toFixed(1)}%</TableCell>
-                                <TableCell>{prestamo.cuotaMensual}</TableCell>
-                                <TableCell>{prestamo.seguroDeDesgravamen}</TableCell>
-                                <TableCell>{prestamo.seguroDeIncendio}</TableCell>
-                                <TableCell>{prestamo.comisionPorAdministracion}</TableCell>
-                                <TableCell>{prestamo.costoMensual}</TableCell>
-                                <TableCell>{prestamo.costosTotales}</TableCell>
+                                <TableCell>{prestamo.montoDelPrestamo.toFixed(2)}</TableCell>
+                                <TableCell>{prestamo.tasaDeInteresAnual.toFixed(2)}%</TableCell>
+                                <TableCell>{prestamo.tasaDeInteresMensual.toFixed(2)}%</TableCell>
+                                <TableCell>{prestamo.cuotaMensual.toFixed(2)}</TableCell>
+                                <TableCell>{prestamo.seguroDeDesgravamen.toFixed(2)}</TableCell>
+                                <TableCell>{prestamo.seguroDeIncendio.toFixed(2)}</TableCell>
+                                <TableCell>{prestamo.comisionPorAdministracion.toFixed(2)}</TableCell>
+                                <TableCell>{prestamo.costoMensual.toFixed(2)}</TableCell>
+                                <TableCell>{prestamo.costosTotales.toFixed(2)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

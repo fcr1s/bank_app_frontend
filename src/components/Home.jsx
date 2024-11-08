@@ -93,7 +93,7 @@ const Home = () => {
                                     onChange={(e) => setPasswordCliente(e.target.value)}
                                 />
                                 <Button type="submit" variant="contained" color="primary" fullWidth>
-                                    Iniciar Sesión
+                                    Iniciar Cliente
                                 </Button>
                             </form>
                         </Paper>

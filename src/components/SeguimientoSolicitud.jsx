@@ -45,7 +45,6 @@ const SeguimientoSolicitud = () => {
 
     const handleVerRazones = (solicitud) => {
         setRazonesRechazo(solicitud.razonesRechazo);
-        setSelectedSolicitud(solicitud);
         setOpenDialog(true);
     };
 

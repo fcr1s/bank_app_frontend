@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Box, Typography, TextField, Button, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Container, Box, Typography, TextField, Button, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import solicitudService from '../services/solicitud.service'; 
 import HomeButton from './HomeButton'; 
@@ -29,16 +29,27 @@ const Solicitud = () => {
     const handleCrearSolicitud = async (e) => {
         e.preventDefault();
         try {
-            await solicitudService.crearSolicitud(tipoPrestamo, parseFloat(valorPropiedad), parseFloat(montoPrestamo), parseFloat(tasaInteresAnual), parseInt(plazo), documentos);
+            await solicitudService.crearSolicitud(
+                tipoPrestamo,
+                parseFloat(valorPropiedad),
+                parseFloat(montoPrestamo),
+                parseFloat(tasaInteresAnual),
+                parseInt(plazo),
+                documentos
+            );
+            setErrorMessage(''); // Limpiar mensajes de error previos
             setSuccessMessage('Solicitud enviada exitosamente.');
+            setOpenSnackbar(true); // Abrir la notificación de éxito
             alert('Solicitud enviada exitosamente.');
             navigate('/options');
         } catch (error) {
             console.error('Error al crear solicitud:', error.response ? error.response.data : error.message);
+            setSuccessMessage(''); // Limpiar mensajes de éxito previos
             setErrorMessage('Error al crear la solicitud. Verifique los datos.');
-            setOpenSnackbar(true);
+            setOpenSnackbar(true); // Abrir la notificación de error
         }
     };
+    
 
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
@@ -105,8 +116,15 @@ const Solicitud = () => {
                         margin="normal"
                         value={tipoPrestamo}
                         onChange={(e) => setTipoPrestamo(e.target.value)}
-                    />
-                    <TextField
+                        select // Este atributo convierte el TextField en un menú desplegable
+                    >
+                        <MenuItem value="Primera Vivienda">Primera Vivienda</MenuItem>
+                        <MenuItem value="Segunda Vivienda">Segunda Vivienda</MenuItem>
+                        <MenuItem value="Propiedades Comerciales">Propiedades Comerciales</MenuItem>
+                        <MenuItem value="Remodelación">Remodelación</MenuItem>
+                    </TextField>
+
+                                        <TextField
                         label="Valor de la Propiedad"
                         type="number"
                         variant="outlined"

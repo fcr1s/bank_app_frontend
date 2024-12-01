@@ -24,7 +24,7 @@ const actualizarEstadoSolicitud = (id, nuevoEstado) => {
 
 const evaluarSolicitud = (solicitudId, ingresosMensuales, buenHistorialCrediticio, antiguedadLaboral, totalDeudas, edadCliente, saldoCuenta, saldoConsistente, totalDepositos, antiguedadCuenta, porcentajeRetiroReciente) => {
   return httpClient.put(`/ejecutivos/evaluar-solicitud/${solicitudId}`, null, {
-      params: { ingresosMensuales, buenHistorialCrediticio, antiguedadLaboral, totalDeudas, valorPropiedad, edadCliente, saldoCuenta, saldoConsistente, totalDepositos, antiguedadCuenta, porcentajeRetiroReciente }
+      params: { ingresosMensuales, buenHistorialCrediticio, antiguedadLaboral, totalDeudas, edadCliente, saldoCuenta, saldoConsistente, totalDepositos, antiguedadCuenta, porcentajeRetiroReciente }
   })
 }
 
